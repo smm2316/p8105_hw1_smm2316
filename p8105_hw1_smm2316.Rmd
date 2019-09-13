@@ -1,0 +1,22 @@
+---
+title: "Homework 1"
+author: Sarah McLarnan
+date: 2019-09-13
+output: github_document
+---
+
+```{r question_1, message = FALSE}
+
+library(tidyverse)
+
+df_q1 = tibble(
+  
+  num_vec = rnorm(8),
+
+  num_vec_pos = num_vec > 0,
+
+  char_vec = character(length=8),
+
+  fac_vec = factor(c("1", "2", "3", "1", "2", "3", "1", "2"))
+  
+)
