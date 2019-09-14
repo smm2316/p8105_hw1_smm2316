@@ -5,7 +5,8 @@ date: 2019-09-13
 output: github_document
 ---
 
-```{r question_1, message = FALSE}
+##PROBLEM 1
+```{r question_1_pt1, message = FALSE}
 
 library(tidyverse)
 
@@ -16,9 +17,40 @@ df_q1 = tibble(
   fac_vec = factor(c("1", "2", "3", "1", "2", "3", "1", "2"))
 )
 
-mean("num_vec")
+mean(df_q1$num_vec)
+mean(df_q1$num_vec_pos)
+mean(df_q1$char_vec)
+mean(df_q1$fac_vac)
 
 ```
+Created dataframe for question 1 with four vector. Attempted to calculate mean of each vectorr. Successfully calculated the means of both the numeric and logical vectors. Recieved errors for the character and factor vectors because they are not numeric or logical. 
 
-```{r}
-as.numeric("num_vec_pos")
+```{r question_1_pt2, message = FALSE, eval = FALSE}
+
+as.numeric(df_q1$num_vec_pos)
+as.numeric(df_q1$char_vec)
+as.numeric(df_q1$fac_vec)
+
+```
+The as.numeric converted each vector to numeric. In the case of the logical vector it assigned 0 to FALSE and 1 to TRUE. THe function was unable to assign a number to the character vector and NA was entered. The factor vector was converted to 1, 2, and 3 in line with the factor levels. 
+
+```{r, question_1_pt3, message = FALSE}
+
+as.numeric(df_q1$num_vec_pos)*df_q1$num_vec
+as.factor(df_q1$num_vec_pos)*df_q1$num_vec
+as.numeric(as.factor(df_q1$num_vec_pos))*df_q1$num_vec
+
+```
+##PROBLEM 2
+
+```{r, question_2_pt1, message = FALSE}
+
+df_q2 = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  xy1 = x + y > 1,
+  as.numeric(xy1),
+  as.factor(xy1)
+)
+
+```
