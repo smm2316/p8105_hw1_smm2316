@@ -55,3 +55,7 @@ df_q2 = tibble(
   as.numeric(xy1),
   as.factor(xy1)
 )
+
+```
+The dataset is `r nrow(df_q2)` rows by `r ncol(df_q2)` columns. The mean of variable x is `r mean(df_q2$x)`, the median is `r median(df_q2$x)`, and the standard deviation is `r sd(df_q2$x)`. 
+
