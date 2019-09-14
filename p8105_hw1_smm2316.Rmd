@@ -52,14 +52,24 @@ df_q2 = tibble(
   x = rnorm(500),
   y = rnorm(500),
   xy1 = x + y > 1,
-  as.numeric(xy1),
-  as.factor(xy1)
+  num_xy1 = as.numeric(xy1),
+  fac_xy1 = as.factor(xy1)
 )
 
 ```
 The dataset is `r nrow(df_q2)` rows by `r ncol(df_q2)` columns. The mean of variable x is `r mean(df_q2$x)`, the median is `r median(df_q2$x)`, and the standard deviation is `r sd(df_q2$x)`. 
 
 ```{r, question_2_pt2, message = FALSE}
-library(ggplot2)
-ggplot(df_q2, aes(x=x, y=y)) + geom_point(col="firebrick")
 
+library(ggplot2)
+
+plot_x_y = ggplot(df_q2, aes(x=x, y=y)) + geom_point(col="firebrick")
+plot_x_y
+plot_num_xy1_x = ggplot(df_q2, aes(x=x, y=num_xy1)) + geom_point(col="steelblue")
+plot_num_xy1_x
+plot_fac_xy1_x = ggplot(df_q2, aes(x=x, y=fac_xy1)) + geom_point(col="gold")
+plot_fac_xy1_x
+
+ggsave("homework_1_plot.png", plot=plot_x_y)
+```
+plot_x_y is a scatter plot of variable y by x seen in red. plot_num_xy1_x is a scatter plot of the numeric vector by x seen in blue. plot_fac_xy1_x is a scatter plot of the factor vector by x seen in yellow. 
