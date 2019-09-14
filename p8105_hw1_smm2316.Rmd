@@ -59,3 +59,7 @@ df_q2 = tibble(
 ```
 The dataset is `r nrow(df_q2)` rows by `r ncol(df_q2)` columns. The mean of variable x is `r mean(df_q2$x)`, the median is `r median(df_q2$x)`, and the standard deviation is `r sd(df_q2$x)`. 
 
+```{r, question_2_pt2, message = FALSE}
+library(ggplot2)
+ggplot(df_q2, aes(x=x, y=y)) + geom_point(col="firebrick")
+
