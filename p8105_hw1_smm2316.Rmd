@@ -36,3 +36,22 @@ The as.numeric converted each vector to numeric. In the case of the logical vect
 
 
 ```
+
+```{r, question_1_pt3, message = FALSE}
+
+as.numeric(df_q1$num_vec_pos)*df_q1$num_vec
+as.factor(df_q1$num_vec_pos)*df_q1$num_vec
+as.numeric(as.factor(df_q1$num_vec_pos))*df_q1$num_vec
+
+```
+##PROBLEM 2
+
+```{r, question_2_pt1, message = FALSE}
+
+df_q2 = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  xy1 = x + y > 1,
+  as.numeric(xy1),
+  as.factor(xy1)
+)
