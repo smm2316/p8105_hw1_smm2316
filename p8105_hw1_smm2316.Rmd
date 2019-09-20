@@ -17,31 +17,29 @@ df_q1 = tibble(
   fac_vec = factor(c("1", "2", "3", "1", "2", "3", "1", "2"))
 )
 
-mean(df_q1$num_vec)
-mean(df_q1$num_vec_pos)
-mean(df_q1$char_vec)
-mean(df_q1$fac_vac)
+mean(pull(df_q1, num_vec))
+mean(pull(df_q1, num_vec_pos))
+mean(pull(df_q1, char_vec))
+mean(pull(df_q1, fac_vec))
 
 ```
 Created dataframe for question 1 with four vector. Attempted to calculate mean of each vectorr. Successfully calculated the means of both the numeric and logical vectors. Recieved errors for the character and factor vectors because they are not numeric or logical. 
 
 ```{r question_1_pt2, message = FALSE, eval = FALSE}
 
-as.numeric(df_q1$num_vec_pos)
-as.numeric(df_q1$char_vec)
-as.numeric(df_q1$fac_vec)
+as.numeric(pull(df_q1,num_vec_pos))
+as.numeric(pull(df_q1, char_vec))
+as.numeric(pull(df_q1, fac_vec))
 
 ```
-The as.numeric converted each vector to numeric. In the case of the logical vector it assigned 0 to FALSE and 1 to TRUE. THe function was unable to assign a number to the character vector and NA was entered. The factor vector was converted to 1, 2, and 3 in line with the factor levels. 
+The as.numeric converted each vector to numeric. In the case of the logical vector it assigned 0 to FALSE and 1 to TRUE. THe function was unable to assign a number to the character vector and NA was entered. The factor vector was converted to 1, 2, and 3 in accordance with the factor levels. The coding of the logical vector as 0s and 1s helps explain why it is possible to take the mean of a logical vector but not the character and factor vectors.
 
-
-```
 
 ```{r, question_1_pt3, message = FALSE}
 
-as.numeric(df_q1$num_vec_pos)*df_q1$num_vec
-as.factor(df_q1$num_vec_pos)*df_q1$num_vec
-as.numeric(as.factor(df_q1$num_vec_pos))*df_q1$num_vec
+as.numeric((pull(df_q1, num_vec_pos))*(pull(df_q1, num_vec)))
+as.factor((pull(df_q1, num_vec_pos))*(pull(df_q1, num_vec)))
+as.numeric((as.factor((pull(df_q1, num_vec_pos))*(pull(df_q1, num_vec)))))
 
 ```
 ##PROBLEM 2
@@ -57,19 +55,20 @@ df_q2 = tibble(
 )
 
 ```
-The dataset is `r nrow(df_q2)` rows by `r ncol(df_q2)` columns. The mean of variable x is `r mean(df_q2$x)`, the median is `r median(df_q2$x)`, and the standard deviation is `r sd(df_q2$x)`. 
+The dataset is `r nrow(df_q2)` rows by `r ncol(df_q2)` columns. The mean of variable x is `r mean(df_q2$x)`, the median is `r median(df_q2$x)`, and the standard deviation is `r sd(df_q2$x)`. The proportion of cases in which x + y > 1 is `r mean(pull(df_q2, num_xy1))*100`. 
 
 ```{r, question_2_pt2, message = FALSE}
 
-library(ggplot2)
 
-plot_x_y = ggplot(df_q2, aes(x=x, y=y)) + geom_point(col="firebrick")
-plot_x_y
-plot_num_xy1_x = ggplot(df_q2, aes(x=x, y=num_xy1)) + geom_point(col="steelblue")
-plot_num_xy1_x
-plot_fac_xy1_x = ggplot(df_q2, aes(x=x, y=fac_xy1)) + geom_point(col="gold")
-plot_fac_xy1_x
+plot_x_y = ggplot(df_q2, aes(x=x, y=y, color=xy1)) + geom_point()
+  plot_x_y
+
+plot_num_xy1_x = ggplot(df_q2, aes(x=x, y=y, color=num_xy1)) + geom_point()
+  plot_num_xy1_x
+
+plot_fac_xy1_x = ggplot(df_q2, aes(x=x, y=y, color=fac_xy1)) + geom_point()
+  plot_fac_xy1_x
 
 ggsave("homework_1_plot.png", plot=plot_x_y)
 ```
-plot_x_y is a scatter plot of variable y by x seen in red. plot_num_xy1_x is a scatter plot of the numeric vector by x seen in blue. plot_fac_xy1_x is a scatter plot of the factor vector by x seen in yellow. 
+plot_x_y is a scatter plot of the logical vector that describes whether x + y > 1 with red points being false (<=1) and blue being true (>1), the scale is dichotomous because it is a logical vector. Plot_num_xy1_x is a scatter plot of the numeric vector created from the logical vector that describes whether x + y  > 1. In this case the blue points indicate 1s (x + y >1) and black points are 0s (x + y <= 1), however because the vector is numerica the scale is now continuous as seen by the gradient in the legend. Plot_fac_xy1_x is a scatter plot of the factor vector created from the logical vector describing whether x + y > 1. As with the first graph red points are false (<=1) and blue are true (>1), the scale is dichotomous because it is a factor vector with two levels. 
